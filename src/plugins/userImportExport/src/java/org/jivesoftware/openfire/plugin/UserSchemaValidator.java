@@ -1,4 +1,4 @@
-package org.jivesoftware.wildfire.plugin;
+package org.jivesoftware.openfire.plugin;
 
 import com.sun.msv.reader.util.GrammarLoader;
 import com.sun.msv.reader.util.IgnoreController;
