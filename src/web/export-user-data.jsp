@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.io.IOException,
                  java.util.*,
                  org.jivesoftware.openfire.plugin.ImportExportPlugin,
@@ -13,7 +12,6 @@
     boolean exportUsers = request.getParameter("exportUsers") != null;
     boolean success = request.getParameter("success") != null;
     boolean exportToFile = ParamUtils.getBooleanParameter(request, "exporttofile", true);
-    boolean xep227Support = ParamUtils.getBooleanParameter(request, "xep227support", false);
     
     ImportExportPlugin plugin = (ImportExportPlugin)XMPPServer.getInstance().getPluginManager(
             ).getPlugin("userimportexport");
@@ -28,12 +26,12 @@
                 errors.put("missingFile","missingFile");
             }
             else {
-                response.sendRedirect("export-file.jsp?fileName="+file + ( xep227Support ? "&xep227support=true" : ""));
+                response.sendRedirect("export-file.jsp?fileName="+file);
             }
         }
         else {
             try {
-                exportText = plugin.exportUsersToString(xep227Support);
+                exportText = plugin.exportUsersToString();
             }
             catch (IOException e) {
                 errors.put("IOException","IOException");
@@ -96,7 +94,7 @@
     <table cellpadding="3" cellspacing="0" border="0" width="100%">
     <tbody>
         <tr>
-            <td width="1%"><input type="radio" name="exporttofile" value="true" <%= exportToFile ? "checked" : "" %> id="rb01"/></td>
+            <td width="1%"><input type="radio" name="exporttofile" value="true" <%= exportToFile ? "checked" : "" %> id="rb01"></td>
             <td width="99%"><label for="rb01"><b>To File</b></label> - Save user data to the specified file location.</td>
         </tr>
         <tr>
@@ -104,16 +102,12 @@
             <td width="99%">Export File Name:&nbsp;<input type="text" size="30" maxlength="150" name="exportFile"></td>
         </tr>
         <tr>
-            <td width="1%"><input type="radio" name="exporttofile" value="false" <%= !exportToFile ? "checked" : "" %> id="rb02"/></td>
+            <td width="1%"><input type="radio" name="exporttofile" value="false" <%= !exportToFile ? "checked" : "" %> id="rb02"></td>
             <td width="99%"><label for="rb02"><b>To Screen</b></label> - Display user data in the text area below.</td>            
         </tr>
         <tr>
             <td width="1%">&nbsp;</td>
             <td width="99%"><textarea cols="80" rows="20" wrap=off><%=exportText %></textarea></td>
-        </tr>
-         <tr>
-            <td width="1%"><input type="checkbox" name="xep227support" <%= xep227Support ? "checked" : "" %> id="rb03"/></td>
-            <td width="99%"><label for="rb03"><b>XEP-0227</b></label> - Export using format defined in <a href="http://www.xmpp.org/extensions/xep-0227.html" target="_blank">XEP-0227</a>.</td>
         </tr>
     </tbody>
     </table>
