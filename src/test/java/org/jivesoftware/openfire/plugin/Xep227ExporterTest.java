@@ -1,4 +1,5 @@
-/*
+/**
+ *
  * Copyright 2016 Anno van Vliet
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -133,7 +134,7 @@ public class Xep227ExporterTest {
   @Before
   public void setUp() throws Exception {
     
-    URL url = this.getClass().getResource("/test-openfire.xml");
+    URL url = this.getClass().getResource("test-openfire.xml");
     File f = new File(url.getFile());
     JiveGlobals.setConfigName(f.getName());
     JiveGlobals.setHomeDirectory(f.getParent());
@@ -206,7 +207,7 @@ public class Xep227ExporterTest {
 
     InExporter testobject = new Xep227Exporter("serverName", offlineMessagesStore, vCardManager, privateStorage, userManager, rosterItemProvider);
 
-    InputStream stream = this.getClass().getResourceAsStream("/test-xepp227-import.xml");
+    InputStream stream = this.getClass().getResourceAsStream("test-xepp227-import.xml");
 
     assertTrue("Invalid input", testobject.validate(stream));
 
@@ -226,7 +227,7 @@ public class Xep227ExporterTest {
 
     InExporter testobject = new Xep227Exporter("serverName", offlineMessagesStore, vCardManager, privateStorage, userManager, rosterItemProvider);
 
-    InputStream stream = this.getClass().getResourceAsStream("/test-xepp227-import.xml");
+    InputStream stream = this.getClass().getResourceAsStream("test-xepp227-import.xml");
 
     String previousDomain = null;
     boolean isUserProviderReadOnly = false;

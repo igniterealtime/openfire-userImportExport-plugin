@@ -1,4 +1,5 @@
-package org.jivesoftware.openfire.plugin;/*
+/**
+ *
  * Copyright 2016 Anno van Vliet
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +14,7 @@ package org.jivesoftware.openfire.plugin;/*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jivesoftware.openfire.plugin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -71,7 +73,7 @@ public class OpenfireExporterTest {
   @Before
   public void setUp() throws Exception {
     
-    URL url = this.getClass().getResource("/test-openfire.xml");
+    URL url = this.getClass().getResource("test-openfire.xml");
     File f = new File(url.getFile());
     JiveGlobals.setConfigName(f.getName());
     JiveGlobals.setHomeDirectory(f.getParent());
@@ -91,7 +93,7 @@ public class OpenfireExporterTest {
   @Test
   public void testExportUsers() throws UserAlreadyExistsException, IOException {
     
-    InExporter testobject = new OpenfireExporter( "serverName", userManager, rosterItemProvider);
+    InExporter testobject = new OpenfireExporter("serverName",userManager,rosterItemProvider);
     
     for (int i = 0; i < 10; i++) {
       userManager.createUser("username" + i,"pw" , "name" + i, "email" + i);
@@ -131,7 +133,7 @@ public class OpenfireExporterTest {
 
     InExporter testobject = new OpenfireExporter("serverName",userManager,rosterItemProvider);
 
-    String TEST_IMPORT_FILE = "/test-openfire-import.xml";
+    String TEST_IMPORT_FILE = "test-openfire-import.xml";
     
     InputStream stream = this.getClass().getResourceAsStream(TEST_IMPORT_FILE);
     

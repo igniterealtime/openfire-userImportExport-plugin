@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.net.MalformedURLException,
                  java.util.*,
                  org.dom4j.DocumentException,
@@ -19,40 +18,22 @@
     Map<String, String> errors = new HashMap<String, String>();
     if (importUsers) {
         DiskFileUpload dfu = new DiskFileUpload();
-
-        String previousDomain = null;
-        xep227Support = false;
-        FileItem file = null; // the file.
-
-        List<FileItem> fileItems = dfu.parseRequest(request);
-        for ( FileItem fileItem : fileItems )
-        {
-            if ( fileItem.isFormField() )
-            {
-                switch ( fileItem.getFieldName() )
-                {
-                    case "xep227support":
-                        xep227Support = Boolean.parseBoolean( fileItem.getString() );
-                        break;
-                    case "previousDomain":
-                        previousDomain = fileItem.getString();
-                        break;
-                }
-            }
-            else
-            {
-                // the fileItem is an actual file.
-                file = fileItem;
-            }
-        }
+      
+        List fileItems = dfu.parseRequest(request);
+        Iterator i = fileItems.iterator();
+        FileItem fi = (FileItem) i.next();
+        FileItem pd = (FileItem) i.next();
+        String previousDomain = pd.getString();
+        FileItem xsup = (FileItem) i.next();
+        xep227Support = new Boolean( xsup.getString() );
         
-        if (plugin.validateImportFile(file, xep227Support)) {
+        if (plugin.validateImportFile(fi, xep227Support)) {
             try {
                 if (isEmpty(previousDomain)) {
-                    duplicateUsers.addAll(plugin.importUserData(file, null, xep227Support));
+                    duplicateUsers.addAll(plugin.importUserData(fi, null, xep227Support));
                 }
                 else if (!isEmpty(previousDomain)) {
-                    duplicateUsers.addAll(plugin.importUserData(file, previousDomain, xep227Support));
+                    duplicateUsers.addAll(plugin.importUserData(fi, previousDomain, xep227Support));
                 }
                 else {
                     errors.put("missingDomain", "missingDomain");

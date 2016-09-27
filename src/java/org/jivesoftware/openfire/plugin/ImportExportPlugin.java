@@ -1,4 +1,5 @@
-/*
+/**
+ *
  * Copyright 2016 Ryan Graham
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +23,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.text.StringEscapeUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.OutputFormat;
@@ -44,9 +45,9 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:ryan@version2software.com">Ryan Graham</a>
  */
 public class ImportExportPlugin implements Plugin {
-    
-    private static final Logger Log = LoggerFactory.getLogger(ImportExportPlugin.class);
-    
+	
+	private static final Logger Log = LoggerFactory.getLogger(ImportExportPlugin.class);
+	
     private UserProvider provider;
     
     public ImportExportPlugin() {
@@ -107,7 +108,7 @@ public class ImportExportPlugin implements Plugin {
             }
         }
         
-        return StringEscapeUtils.escapeHtml4(stringWriter.toString());
+        return StringEscapeUtils.escapeHtml(stringWriter.toString());
     }
     
     /**
@@ -134,7 +135,7 @@ public class ImportExportPlugin implements Plugin {
     /**
      * Returns whether or not the supplied FileItem matches the openfire user schema
      *
-     * @param usersFile a FileItem to be validated.
+     * @param file a FileItem to be validated.
      * @return True if FileItem matches the openfire user schema.
      */
     public boolean validateImportFile(FileItem usersFile, boolean xep227Support) {

@@ -1,4 +1,5 @@
-/*
+/**
+ *
  * Copyright 2016 Anno van Vliet
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,6 +55,7 @@ public class OpenfireExporter implements InExporter {
   private final RosterItemProvider rosterItemProvider;
   
   /**
+   * 
    */
   public OpenfireExporter() {
     serverName = XMPPServer.getInstance().getServerInfo().getXMPPDomain();
@@ -232,11 +234,11 @@ public class OpenfireExporter implements InExporter {
         }
       }
 
-      if (userName != null) {
+      if ((userName != null) && (password != null)) {
         try {
           userName = Stringprep.nodeprep(userName);
 
-          if (!isUserProviderReadOnly && (password != null)) {
+          if (isUserProviderReadOnly) {
             userManager.createUser(userName, password, name, email);
           }
 
