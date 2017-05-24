@@ -4,43 +4,17 @@
     <parent>
         <artifactId>plugins</artifactId>
         <groupId>org.igniterealtime.openfire</groupId>
-        <version>4.3.0-beta</version>
+        <version>4.2.0-SNAPSHOT</version>
     </parent>
     <groupId>org.igniterealtime.openfire.plugins</groupId>
     <artifactId>userImportExport</artifactId>
-    <version>2.6.3-SNAPSHOT</version>
     <name>UserImportExport Plugin</name>
-    <description>Enables import and export of user data</description>
-
-    <developers>
-        <developer>
-            <name>Ryan Graham</name>
-        </developer>
-    </developers>
-
-    <properties>
-        <msv.version>20050913</msv.version>
-    </properties>
-
 
     <build>
         <sourceDirectory>src/java</sourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-            </plugin>
-            <!-- Compiles the Openfire Admin Console JSP pages. -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-jspc-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12.4</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -49,22 +23,27 @@
         <dependency>
             <groupId>msv</groupId>
             <artifactId>msv</artifactId>
-            <version>${msv.version}</version>
+            <version>20030225</version>
         </dependency>
         <dependency>
             <groupId>msv</groupId>
             <artifactId>isorelax</artifactId>
-            <version>${msv.version}</version>
+            <version>20030225</version>
         </dependency>
         <dependency>
             <groupId>msv</groupId>
             <artifactId>relaxngDatatype</artifactId>
-            <version>${msv.version}</version>
+            <version>20030225</version>
         </dependency>
         <dependency>
             <groupId>msv</groupId>
             <artifactId>xsdlib</artifactId>
-            <version>${msv.version}</version>
+            <version>20030225</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
