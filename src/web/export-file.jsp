@@ -6,7 +6,6 @@
     String fileName = request.getParameter("fileName");
     boolean xep227Support = ParamUtils.getBooleanParameter(request, "xep227support", false);
 
-    response.setContentType("application/x-download");
     response.setHeader("Content-Disposition","attachment;filename="+fileName+".xml");
     ImportExportPlugin plugin = (ImportExportPlugin) XMPPServer.getInstance().getPluginManager().getPlugin("userimportexport");
     byte[] content = plugin.exportUsersToByteArray(xep227Support);
