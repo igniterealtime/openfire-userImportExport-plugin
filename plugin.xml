@@ -13,9 +13,12 @@
    <adminconsole>
       <tab id="tab-users">
          <sidebar id="user-import-export" name="Import &amp; Export">
-            <item id="import-export-selection" name="User Import &amp; Export"
-                  url="import-export-selection.jsp"
-                  description="Allows the importing and exporting of Openfire user data." />
+            <item id="export-user-data" name="Export user data"
+                  url="export-user-data.jsp"
+                  description="Allows the exporting of Openfire user data." />
+            <item id="import-user-data" name="Import user data"
+                  url="import-user-data.jsp"
+                  description="Allows the importing of Openfire user data." />
          </sidebar>
       </tab>
    </adminconsole>
