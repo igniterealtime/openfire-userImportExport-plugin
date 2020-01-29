@@ -81,7 +81,7 @@
 <html>
     <head>
         <title>Import User Data</title>
-        <meta name="pageID" content="import-export-selection"/>
+        <meta name="pageID" content="import-user-data"/>
     </head>
     <body>
 
