@@ -7,7 +7,7 @@
    <description>Enables import and export of user data</description>
    <author>Ryan Graham</author>
    <version>${project.version}</version>
-   <date>07/01/2019</date>
+   <date>2023-11-21</date>
    <minServerVersion>4.3.0</minServerVersion>
 
    <adminconsole>
