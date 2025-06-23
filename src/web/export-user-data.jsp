@@ -16,7 +16,7 @@
     boolean xep227Support = ParamUtils.getBooleanParameter(request, "xep227support", false);
     
     ImportExportPlugin plugin = (ImportExportPlugin)XMPPServer.getInstance().getPluginManager(
-            ).getPlugin("userimportexport");
+            ).getPluginByName("User Import Export").orElseThrow();
 
     String exportText = "";
     

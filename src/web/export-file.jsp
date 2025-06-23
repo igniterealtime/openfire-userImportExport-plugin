@@ -7,7 +7,7 @@
     boolean xep227Support = ParamUtils.getBooleanParameter(request, "xep227support", false);
 
     response.setHeader("Content-Disposition","attachment;filename="+fileName+".xml");
-    ImportExportPlugin plugin = (ImportExportPlugin) XMPPServer.getInstance().getPluginManager().getPlugin("userimportexport");
+    ImportExportPlugin plugin = (ImportExportPlugin) XMPPServer.getInstance().getPluginManager().getPluginByName("User Import Export").orElseThrow();
     byte[] content = plugin.exportUsersToByteArray(xep227Support);
     OutputStream os = response.getOutputStream();
     os.write(content);

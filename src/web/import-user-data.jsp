@@ -13,7 +13,7 @@
     boolean importUsers = request.getParameter("importUsers") != null;
     boolean xep227Support = request.getParameter("xep227support") != null;
    
-    ImportExportPlugin plugin = (ImportExportPlugin) XMPPServer.getInstance().getPluginManager().getPlugin("userimportexport");
+    ImportExportPlugin plugin = (ImportExportPlugin) XMPPServer.getInstance().getPluginManager().getPluginByName("User Import Export").orElseThrow();
     List<String> duplicateUsers = new ArrayList<String>();
    
     Map<String, String> errors = new HashMap<String, String>();
