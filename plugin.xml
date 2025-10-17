@@ -5,7 +5,7 @@
 
    <name>User Import Export</name>
    <description>Enables import and export of user data</description>
-   <author>Ryan Graham</author>
+   <author>${project.developers[0].name}</author>
    <version>${project.version}</version>
    <date>2025-06-23</date>
    <minServerVersion>4.4.0</minServerVersion>
