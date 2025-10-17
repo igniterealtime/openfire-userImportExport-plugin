@@ -125,7 +125,7 @@ public class OpenfireExporter implements InExporter {
             
             List<String> groups = ri.getGroups();
             for (String group : groups) {
-                if (group != null && group.trim().length() > 0) {
+                if (group != null && !group.isBlank()) {
                   itemElement.addElement("Group").addText(group);
                 }
             }

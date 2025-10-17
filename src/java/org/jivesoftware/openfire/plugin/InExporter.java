@@ -15,12 +15,10 @@
  */
 package org.jivesoftware.openfire.plugin;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 
 /**
  * An interface to an In and Exporter.
@@ -32,9 +30,6 @@ public interface InExporter {
 
   /**
    * Export the users in a Document
-   * @param userManager 
-   * 
-   * @return
    */
   Document exportUsers();
 
@@ -43,8 +38,6 @@ public interface InExporter {
    * @param doc 
    * 
    * @return is Valid xml
-   * @throws IOException 
-   * @throws DocumentException 
    */
   boolean validate(InputStream doc);
 

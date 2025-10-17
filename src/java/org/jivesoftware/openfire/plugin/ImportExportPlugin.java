@@ -53,9 +53,11 @@ public class ImportExportPlugin implements Plugin {
         provider = UserManager.getUserProvider();
     }
 
+    @Override
     public void initializePlugin(PluginManager manager, File pluginDirectory) {
     }
 
+    @Override
     public void destroyPlugin() {
         provider = null;
     }
@@ -125,9 +127,7 @@ public class ImportExportPlugin implements Plugin {
      * @throws DocumentException if an error occurs during parsing.
      */
     public List<String> importUserData(FileItem file, String previousDomain, boolean xep227Support) throws DocumentException, IOException {
-
         InExporter exporter = XMLImportExportFactory.getExportInstance(xep227Support);
-
         return exporter.importUsers(file.getInputStream(), previousDomain,isUserProviderReadOnly());
     }
     
@@ -140,7 +140,6 @@ public class ImportExportPlugin implements Plugin {
     public boolean validateImportFile(FileItem usersFile, boolean xep227Support) {
         try {
           InExporter exporter = XMLImportExportFactory.getExportInstance(xep227Support);
-          
           return exporter.validate(usersFile.getInputStream());
         }
         catch (Exception e) {
@@ -150,9 +149,7 @@ public class ImportExportPlugin implements Plugin {
     }
     
     private Document exportUsers(boolean xep227Support) {
-      
       InExporter exporter = XMLImportExportFactory.getExportInstance(xep227Support);
-      
       return exporter.exportUsers();
     }
     

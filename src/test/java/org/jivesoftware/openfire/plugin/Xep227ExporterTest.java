@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -33,7 +34,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.dom.DOMElement;
 import org.dom4j.io.OutputFormat;
@@ -99,10 +99,11 @@ public class Xep227ExporterTest {
      * @see org.jivesoftware.openfire.OfflineMessageStore#addMessage(org.xmpp.packet.Message)
      */
     @Override
-    public void addMessage(Message message) {
+    public OfflineMessage addMessage(Message message) {
       logger.finest("addMessage:" + message);
       
       assertNotNull(message);
+      return null;
     }
     
   }
@@ -127,16 +128,12 @@ public class Xep227ExporterTest {
   private UserManager userManager;
   private RosterItemProvider rosterItemProvider;
 
-  /**
-   * @throws java.lang.Exception
-   */
   @Before
-  public void setUp() throws Exception {
-    
+  public void setUp() {
     URL url = this.getClass().getResource("/test-openfire.xml");
     File f = new File(url.getFile());
     JiveGlobals.setConfigName(f.getName());
-    JiveGlobals.setHomeDirectory(f.getParent());
+    JiveGlobals.setHomePath(Paths.get(f.getParent()));
     JiveGlobals.setProperty("provider.user.className",
         "org.jivesoftware.openfire.plugin.TestUserProvider");
     
@@ -150,20 +147,15 @@ public class Xep227ExporterTest {
     List<User> l = new ArrayList<>(userManager.getUsers());
     for (User user : l ) {
       userManager.deleteUser(user);
-      
     }
   }
 
   /**
-   * Test method for {@link org.jivesoftware.openfire.plugin.OpenfireExporter#exportUsers(org.jivesoftware.openfire.user.UserManager)}.
-   * @throws UserAlreadyExistsException 
-   * @throws IOException 
+   * Test method for {@link org.jivesoftware.openfire.plugin.OpenfireExporter#exportUsers()}.
    */
   @Test
   public void testExportUsers() throws UserAlreadyExistsException, IOException {
-    
     InExporter testobject = new Xep227Exporter("serverName", offlineMessagesStore, vCardManager, privateStorage, userManager, null);
-    
     for (int i = 0; i < 10; i++) {
       userManager.createUser("username" + i,"pw" , "name" + i, "email" + i);
     }
@@ -192,16 +184,10 @@ public class Xep227ExporterTest {
     logger.fine(out.toString() );
     
     assertTrue("Invalid input", testobject.validate(new ByteArrayInputStream(out.toByteArray())));
-
   }
-  
-  /**
-   * @throws IOException 
-   * @throws DocumentException 
-   * 
-   */
+
   @Test
-  public void testValidateUser() throws DocumentException, IOException {
+  public void testValidateUser() throws IOException {
     logger.finest("testImportUser");
 
     InExporter testobject = new Xep227Exporter("serverName", offlineMessagesStore, vCardManager, privateStorage, userManager, rosterItemProvider);
@@ -211,17 +197,10 @@ public class Xep227ExporterTest {
     assertTrue("Invalid input", testobject.validate(stream));
 
     stream.close();
-
-
   }
-  
-  /**
-   * @throws IOException 
-   * @throws DocumentException 
-   * 
-   */
+
   @Test
-  public void testImportUser() throws DocumentException, IOException {
+  public void testImportUser() throws IOException {
     logger.finest("testImportUser");
 
     InExporter testobject = new Xep227Exporter("serverName", offlineMessagesStore, vCardManager, privateStorage, userManager, rosterItemProvider);
@@ -240,19 +219,13 @@ public class Xep227ExporterTest {
     
     Collection<User> users = userManager.getUsers();
     assertEquals(4, users.size());
-    
-
   }
 
   /**
    * Test if XInclude is working
-   * 
-   * @throws IOException 
-   * @throws DocumentException 
-   * 
    */
   @Test
-  public void testImportXInclude() throws DocumentException, IOException {
+  public void testImportXInclude() throws IOException {
     logger.finest("testImportIncludeUser");
 
     InExporter testobject = new Xep227Exporter("serverName", offlineMessagesStore, vCardManager, privateStorage, userManager, rosterItemProvider);
@@ -281,8 +254,6 @@ public class Xep227ExporterTest {
     
     Collection<User> users = userManager.getUsers();
     assertEquals(2, users.size());
-    
-
   }
 
 }
