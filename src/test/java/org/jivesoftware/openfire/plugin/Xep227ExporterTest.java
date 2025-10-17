@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -98,10 +99,11 @@ public class Xep227ExporterTest {
      * @see org.jivesoftware.openfire.OfflineMessageStore#addMessage(org.xmpp.packet.Message)
      */
     @Override
-    public void addMessage(Message message) {
+    public OfflineMessage addMessage(Message message) {
       logger.finest("addMessage:" + message);
       
       assertNotNull(message);
+      return null;
     }
     
   }
@@ -131,7 +133,7 @@ public class Xep227ExporterTest {
     URL url = this.getClass().getResource("/test-openfire.xml");
     File f = new File(url.getFile());
     JiveGlobals.setConfigName(f.getName());
-    JiveGlobals.setHomeDirectory(f.getParent());
+    JiveGlobals.setHomePath(Paths.get(f.getParent()));
     JiveGlobals.setProperty("provider.user.className",
         "org.jivesoftware.openfire.plugin.TestUserProvider");
     
