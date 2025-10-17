@@ -65,12 +65,8 @@ public class OpenfireExporterTest {
   private UserManager userManager;
   private RosterItemProvider rosterItemProvider;
 
-  /**
-   * @throws java.lang.Exception
-   */
   @Before
-  public void setUp() throws Exception {
-    
+  public void setUp() {
     URL url = this.getClass().getResource("/test-openfire.xml");
     File f = new File(url.getFile());
     JiveGlobals.setConfigName(f.getName());
@@ -80,19 +76,14 @@ public class OpenfireExporterTest {
     
     userManager = UserManager.getInstance();
     rosterItemProvider = new TestRosterItemProvider();
-
   }
 
   /**
-   * Test method for {@link org.jivesoftware.openfire.plugin.OpenfireExporter#exportUsers(org.jivesoftware.openfire.user.UserManager)}.
-   * @throws UserAlreadyExistsException 
-   * @throws IOException 
+   * Test method for {@link org.jivesoftware.openfire.plugin.OpenfireExporter#exportUsers()}.
    */
   @Test
   public void testExportUsers() throws UserAlreadyExistsException, IOException {
-    
     InExporter testobject = new OpenfireExporter( "serverName", userManager, rosterItemProvider);
-    
     for (int i = 0; i < 10; i++) {
       userManager.createUser("username" + i,"pw" , "name" + i, "email" + i);
     }
@@ -115,18 +106,12 @@ public class OpenfireExporterTest {
     writer.write(result);
     
     logger.fine(out.toString() );
-    
-    assertNotNull(testobject.validate(new ByteArrayInputStream(out.toByteArray())));
 
+    assertTrue(testobject.validate(new ByteArrayInputStream(out.toByteArray())));
   }
-  
-  /**
-   * @throws IOException 
-   * @throws DocumentException 
-   * 
-   */
+
   @Test
-  public void testImportUser() throws DocumentException, IOException {
+  public void testImportUser() throws IOException {
     logger.finest("testImportUser");
 
     InExporter testobject = new OpenfireExporter("serverName",userManager,rosterItemProvider);
@@ -149,7 +134,6 @@ public class OpenfireExporterTest {
     assertEquals(0, res.size());
 
     stream.close();
-
   }
   
 }

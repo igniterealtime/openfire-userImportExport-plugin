@@ -91,7 +91,6 @@ public class UserSchemaValidator {
   Document validateAndParse() {
     ValidatorErrorHandler handler = new ValidatorErrorHandler();
     try {
-      
       DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
       documentBuilderFactory.setNamespaceAware(true);
@@ -105,18 +104,11 @@ public class UserSchemaValidator {
 
       if ( schemaSources.length > 0 ) {
         Log.info("Checking Schema's");
-
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
         schemaFactory.setErrorHandler(handler);
-        
         Schema schema = schemaFactory.newSchema(schemaSources);
-
         documentBuilderFactory.setSchema(schema);
-        
-        
         Log.info("Start validating document");
-
       } else {
         Log.info("Loading document");
       }
@@ -154,8 +146,8 @@ public class UserSchemaValidator {
   private class ValidatorErrorHandler implements ErrorHandler {
     private int nrOfErrors = 0;
 
+    @Override
     public void error(SAXParseException e) {
-
       if (e.getMessage().contains(STRICT_DECLARATION_MSG)) {
         Log.warn("This error indicates there is no XML Schema to validate the refered element: " + e.getLocalizedMessage());
       } else {
@@ -164,11 +156,13 @@ public class UserSchemaValidator {
       }
     }
 
+    @Override
     public void fatalError(SAXParseException e) {
       Log.error("Fatal:" + e.getLocalizedMessage());
       nrOfErrors++;
     }
 
+    @Override
     public void warning(SAXParseException e) {
       Log.error("Warning:" + e.getLocalizedMessage());
     }
