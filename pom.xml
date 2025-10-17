@@ -11,12 +11,27 @@
     <version>2.8.1-SNAPSHOT</version>
     <name>UserImportExport Plugin</name>
     <description>Enables import and export of user data</description>
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/igniterealtime/openfire-userImportExport-plugin/issues</url>
+    </issueManagement>
+    <scm>
+        <connection>scm:git:https://github.com/igniterealtime/openfire-userImportExport-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:igniterealtime/openfire-userImportExport-plugin.git</developerConnection>
+        <url>https://github.com/igniterealtime/openfire-userImportExport-plugin</url>
+    </scm>
 
     <developers>
         <developer>
             <name>Ryan Graham</name>
         </developer>
     </developers>
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
     <properties>
         <msv.version>20050913</msv.version>
@@ -36,7 +51,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12.4</version>
+                <version>3.2.5</version>
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
@@ -89,7 +104,7 @@
 
     <pluginRepositories>
         <!-- Typically used to retrieve Maven plugins that are used by this project.
-             This apparently is also used to botain the dependencies _used by_ these
+             This apparently is also used to obtain the dependencies _used by_ these
              plugins (such as the openfire-plugin-assembly-descriptor, needed to
              package the project as an Openfire plugin!) -->
         <pluginRepository>
